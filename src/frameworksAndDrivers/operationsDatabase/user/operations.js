@@ -8,7 +8,7 @@ async function getUser(data) {
   let results = [];
 
   try {
-      [results] = (await connection.query(querys.get_user,[data]));
+      [results] = (await connection.query(querys.get_user,[data.CPFu]));
     } catch (e) {
       console.log(e);
     }
@@ -22,12 +22,13 @@ async function getUser(data) {
 async function insertUser(data) {
 
     try {
-      result = (await client.query(querys.insert_user,fillingValues(data)));
+      result = (await connection.query(querys.insert_user,fillingValues(data)));
       console.log(result);
     } catch (e) {
         console.log(e);
     }
     finally {
+      connection.releaseConnection();
         //return insertResponse.ResponseStatus(result);
     }
 

@@ -1,8 +1,12 @@
 function fillingValues(user) {
-  return {
-    CPF: user.CPF,
-    name: user.name,
-  };
+  return [
+    user.name,
+    user.CPFu,
+    user.saldo,
+    user.email,
+    user.telefone,
+    user.aniversario
+  ];
 }
 
 module.exports = {
