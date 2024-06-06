@@ -1,4 +1,4 @@
-const insert_user = `SELECT insert_user(?,?,?,?,?,?)`
+const insert_user = `CALL insert_user(?,?,?,?,?,?)`
 const get_user =`CALL get_usuario(?)`;
 
 module.exports = {

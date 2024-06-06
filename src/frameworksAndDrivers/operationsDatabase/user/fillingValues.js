@@ -1,4 +1,6 @@
 function fillingValues(user) {
+
+  console.log(user);
   return [
     user.name,
     user.CPFu,

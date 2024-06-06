@@ -2,6 +2,7 @@ const querys = require('./querys.js');
 const { fillingValues } = require('./fillingValues.js');
 const getUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/getUserResponse'); 
 const connection = require('../../dbConfig/DB/config');
+const insertUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/insertUserResponse');
 
 async function getUser(data) {  
   
@@ -21,15 +22,16 @@ async function getUser(data) {
   
 async function insertUser(data) {
 
+  let result = [];
+
     try {
-      result = (await connection.query(querys.insert_user,fillingValues(data)));
-      console.log(result);
+      [result] = (await connection.query(querys.insert_user,fillingValues(data)));
     } catch (e) {
         console.log(e);
     }
     finally {
       connection.releaseConnection();
-        //return insertResponse.ResponseStatus(result);
+      return insertUserResponse.insertResponse(result[0][0].result);
     }
 
 }

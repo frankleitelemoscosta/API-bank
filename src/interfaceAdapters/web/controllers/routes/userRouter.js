@@ -9,6 +9,10 @@ router.route('/CreateUser').post(async (req, res) => {
     const newUser = new Usuario.Builder()
     .setCPF(bodyRequest.CPF)
     .setName(bodyRequest.name)
+    .setSaldo(bodyRequest.saldo)
+    .setEmail(bodyRequest.email)
+    .setTelefone(bodyRequest.telefone)
+    .setAniversario(bodyRequest.aniversario)
     .build();
 
     result = await Op.signinUser(newUser);

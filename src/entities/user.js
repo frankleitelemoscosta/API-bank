@@ -22,7 +22,7 @@ class Usuario {
       }
 
       setCPF(CPF) {
-        this.data.CPFu = Number(CPF);
+        this.data.CPFu = CPF;
         return this;
       }
 
