@@ -16,3 +16,4 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => { console.log("Server running in the port: " + PORT)});
 
 app.use('/user', require('./interfaceAdapters/web/controllers/routes/userRouter'));
+app.use('/transaction', require('./interfaceAdapters/web/controllers/routes/transactionRouter'));

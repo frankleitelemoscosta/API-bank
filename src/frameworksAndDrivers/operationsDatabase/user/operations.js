@@ -1,8 +1,9 @@
 const querys = require('./querys.js');
 const { fillingValues } = require('./fillingValues.js');
-const getUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/getUserResponse'); 
+const getUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/user/getUserResponse.js'); 
 const connection = require('../../dbConfig/DB/config');
-const insertUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/insertUserResponse');
+const insertUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/user/insertUserResponse.js');
+const updateUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/user/updateUserResponse.js');
 
 async function getUser(data) {  
   
@@ -39,23 +40,22 @@ async function insertUser(data) {
   
 async function updateUser(data) {
 
-    const client = await pool.connect();
+    let result = [];
 
     try {
-        console.log(data);
-        resp = await client.query(querys.update_client, fillingValues.fillingValues(data));
+        result = await connection.query(querys.update_client, fillingValues(data));
     } catch (e) {
         console.log(e);
     }
     finally {
-        await client.release();
-        return resp;
+        connection.releaseConnection();
+        return updateUserResponse.updateResponse(result[0][0].result);
     }
 
 }
   
   module.exports = {
     signinUser: insertUser,
-    updateUser: updateUser,
-    getUser: getUser
+    updateUser,
+    getUser
   }

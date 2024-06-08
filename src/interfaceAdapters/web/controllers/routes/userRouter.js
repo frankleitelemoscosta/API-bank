@@ -20,6 +20,24 @@ router.route('/CreateUser').post(async (req, res) => {
     res.send(result);
 });
 
+router.route('/UpdateUser').put(async (req, res) => {
+
+    const bodyRequest = req.body;
+
+    const user = new Usuario.Builder()
+    .setCPF(bodyRequest.CPF)
+    .setName(bodyRequest.name)
+    .setSaldo(bodyRequest.saldo)
+    .setEmail(bodyRequest.email)
+    .setTelefone(bodyRequest.telefone)
+    .setAniversario(bodyRequest.aniversario)
+    .build();
+
+    result = await Op.updateUser(user);
+
+    res.send(result);
+});
+
 router.route('/GetUser').get(async (req, res) => {
     
     const user = new Usuario.Builder()
