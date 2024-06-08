@@ -1,8 +1,7 @@
-const insert_transaction = `CALL insert_user(?,?,?,?,?,?)`
-const get_transaction =`CALL get_usuario(?)`;
+const insert_transaction = `CALL insert_transaction(?,?,?)`
+const get_transaction =`CALL get_transaction(?)`;
 
 module.exports = {
     insert_transaction,
-    update_transaction,
     get_transaction
 }

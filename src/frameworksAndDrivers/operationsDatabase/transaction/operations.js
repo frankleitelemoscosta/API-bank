@@ -15,7 +15,7 @@ async function getTransaction(data) {
     }
     finally {
       connection.releaseConnection();
-      return getUserResponse.getResponse(results[0][0]);
+      return getTransactionResponse.getResponse(results[0][0]);
     }
   
 }
@@ -31,7 +31,7 @@ async function insertTransaction(data) {
     }
     finally {
       connection.releaseConnection();
-      return insertUserResponse.insertResponse(result[0][0].result);
+      return insertTransactionResponse.insertResponse(result[0][0].result);
     }
 
 }

@@ -16,7 +16,7 @@ class Transaction {
         }
   
         setCPFPagante(CPFpagante) {
-          this.data.CPFu = CPFpagante;
+          this.data.CPFpagante = CPFpagante;
           return this;
         }
   
@@ -31,7 +31,7 @@ class Transaction {
         }
 
         build() {
-          return new Usuario(this.data);
+          return new Transaction(this.data);
         }
       }
   

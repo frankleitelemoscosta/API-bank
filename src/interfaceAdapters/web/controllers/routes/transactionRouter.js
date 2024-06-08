@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Transaction = require('../../../../entities/user');
+const Transaction = require('../../../../entities/transaction');
 const Op = require('../../../../frameworksAndDrivers/operationsDatabase/transaction/operations');
 
 router.route('/CreateTransaction').post(async (req, res) => {
@@ -7,10 +7,11 @@ router.route('/CreateTransaction').post(async (req, res) => {
     const bodyRequest = req.body;
     
     const newTransaction = new Transaction.Builder()
-        .setCPFDestinatario(bodyRequest.setCPFDestinatario)
+        .setCPFDestinatario(bodyRequest.CPFDestinatario)
         .setCPFPagante(bodyRequest.CPFPagante)
         .setValor(bodyRequest.valor)
         .build();
+
 
     result = await Op.insertTransaction(newTransaction);
 
@@ -19,10 +20,10 @@ router.route('/CreateTransaction').post(async (req, res) => {
 
 router.route('/GetTransaction').get(async (req, res) => {
     
-    const user = new Transaction.Builder()
-    .setCPF(req.query.CPF).build();
+    const newTransaction = new Transaction.Builder()
+    .setCPFPagante(req.query.CPF).build();
     
-    result = await Op.getTransaction(user);
+    result = await Op.getTransaction(newTransaction);
 
     res.send(result);
 });
