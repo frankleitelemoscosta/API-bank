@@ -10,6 +10,7 @@ router.route('/CreateTransaction').post(async (req, res) => {
         .setCPFDestinatario(bodyRequest.CPFDestinatario)
         .setCPFPagante(bodyRequest.CPFPagante)
         .setValor(bodyRequest.valor)
+        .setModo(bodyRequest.modo)
         .build();
 
 

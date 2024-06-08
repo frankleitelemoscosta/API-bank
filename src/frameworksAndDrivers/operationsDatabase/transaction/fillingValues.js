@@ -3,7 +3,8 @@ function fillingValues(data) {
     return [
         data.CPFpagante,
         data.CPFDestinatario,
-        data.valor
+        data.valor,
+        data.modo
     ];
   }
   

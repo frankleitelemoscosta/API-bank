@@ -2,11 +2,13 @@ class Transaction {
     constructor({
       CPFpagante, 
       CPFDestinatario,
-      valor
+      valor,
+      modo
     }) {
       this.CPFpagante = CPFpagante;
       this.CPFDestinatario = CPFDestinatario;
       this.valor = valor;
+      this.modo = modo;
     }
   
     static get Builder(){
@@ -27,6 +29,11 @@ class Transaction {
   
         setCPFDestinatario(CPFDestinatario) {
           this.data.CPFDestinatario = CPFDestinatario;
+          return this;
+        }
+
+        setModo(modo) {
+          this.data.modo = modo;
           return this;
         }
 

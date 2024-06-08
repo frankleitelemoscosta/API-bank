@@ -1,4 +1,4 @@
-const insert_transaction = `CALL insert_transaction(?,?,?)`
+const insert_transaction = `CALL insert_transaction(?,?,?,?)`
 const get_transaction =`CALL get_transaction(?)`;
 
 module.exports = {
