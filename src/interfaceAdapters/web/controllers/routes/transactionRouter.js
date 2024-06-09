@@ -5,18 +5,24 @@ const Op = require('../../../../frameworksAndDrivers/operationsDatabase/transact
 router.route('/CreateTransaction').post(async (req, res) => {
 
     const bodyRequest = req.body;
-    
-    const newTransaction = new Transaction.Builder()
+    let newTransaction;
+   
+    try{
+        newTransaction = new Transaction.Builder()
         .setCPFDestinatario(bodyRequest.CPFDestinatario)
         .setCPFPagante(bodyRequest.CPFPagante)
         .setValor(bodyRequest.valor)
         .setModo(bodyRequest.modo)
         .build();
 
+        result = await Op.insertTransaction(newTransaction);
 
-    result = await Op.insertTransaction(newTransaction);
+        res.send(result);
 
-    res.send(result);
+    }catch(e){
+        res.send({status: 400, message: e.message});
+    }
+
 });
 
 router.route('/GetTransaction').get(async (req, res) => {

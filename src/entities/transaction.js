@@ -1,3 +1,5 @@
+const TransacaoValidate = require('../interfaceAdapters/web/validators/transactionValidate');
+
 class Transaction {
     constructor({
       CPFpagante, 
@@ -18,7 +20,7 @@ class Transaction {
         }
   
         setCPFPagante(CPFpagante) {
-          this.data.CPFpagante = CPFpagante;
+          this.data.CPFpagante = CPFpagante ? TransacaoValidate.CPF(CPFpagante) : null;
           return this;
         }
   
@@ -28,16 +30,20 @@ class Transaction {
         }
   
         setCPFDestinatario(CPFDestinatario) {
-          this.data.CPFDestinatario = CPFDestinatario;
+          this.data.CPFDestinatario = CPFDestinatario ? TransacaoValidate.CPF(CPFDestinatario) : null;
           return this;
         }
 
         setModo(modo) {
-          this.data.modo = modo;
+          this.data.modo = modo ? TransacaoValidate.mode(modo) : null;
           return this;
         }
 
         build() {
+          let validation = TransacaoValidate.run(this.data);
+          if(validation.error) {
+            throw new Error("Validation: " + validation.message);
+          }
           return new Transaction(this.data);
         }
       }
