@@ -6,36 +6,48 @@ router.route('/CreateUser').post(async (req, res) => {
 
     const bodyRequest = req.body;
     
-    const newUser = new Usuario.Builder()
-    .setCPF(bodyRequest.CPF)
-    .setName(bodyRequest.name)
-    .setSaldo(bodyRequest.saldo)
-    .setEmail(bodyRequest.email)
-    .setTelefone(bodyRequest.telefone)
-    .setAniversario(bodyRequest.aniversario)
-    .build();
+    try{
+        const newUser = new Usuario.Builder()
+        .setCPF(bodyRequest.CPF)
+        .setName(bodyRequest.name)
+        .setSaldo(bodyRequest.saldo)
+        .setEmail(bodyRequest.email)
+        .setTelefone(bodyRequest.telefone)
+        .setAniversario(bodyRequest.aniversario)
+        .build();
 
-    result = await Op.signinUser(newUser);
+        result = await Op.signinUser(newUser);
 
-    res.send(result);
+        res.send(result);
+        
+    }catch(e){
+        res.send({status: 400, message: e.message});
+    }
+
 });
 
 router.route('/UpdateUser').put(async (req, res) => {
 
     const bodyRequest = req.body;
 
-    const user = new Usuario.Builder()
-    .setCPF(bodyRequest.CPF)
-    .setName(bodyRequest.name)
-    .setSaldo(bodyRequest.saldo)
-    .setEmail(bodyRequest.email)
-    .setTelefone(bodyRequest.telefone)
-    .setAniversario(bodyRequest.aniversario)
-    .build();
+    try{
+        const user = new Usuario.Builder()
+        .setCPF(bodyRequest.CPF)
+        .setName(bodyRequest.name)
+        .setSaldo(bodyRequest.saldo)
+        .setEmail(bodyRequest.email)
+        .setTelefone(bodyRequest.telefone)
+        .setAniversario(bodyRequest.aniversario)
+        .build();
 
-    result = await Op.updateUser(user);
+        result = await Op.updateUser(user);
 
-    res.send(result);
+        res.send(result);
+
+    }catch(e){
+        res.send({status: 400, message: e.message});
+    }
+
 });
 
 router.route('/GetUser').get(async (req, res) => {
