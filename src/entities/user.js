@@ -1,3 +1,5 @@
+const UserValidate = require('../interfaceAdapters/web/validators/userValidate');
+
 class Usuario {
   constructor({
     CPFu, 
@@ -22,12 +24,12 @@ class Usuario {
       }
 
       setCPF(CPF) {
-        this.data.CPFu = CPF;
+        this.data.CPFu = CPF ? CPF.UserValidate.CPF(CPF) : null;
         return this;
       }
 
       setName(name) {
-        this.data.name = name;
+        this.data.name = name ? UserValidate.name(name) : null;
         return this;
       }
 
@@ -37,12 +39,12 @@ class Usuario {
       }
 
       setEmail(email) {
-        this.data.email = email;
+        this.data.email = email ? UserValidate.email(email) : null;
         return this;
       }
 
       setTelefone(telefone) {
-        this.data.telefone = telefone;
+        this.data.telefone = telefone ? UserValidate.phone(telefone) : null;
         return this;
       }
 
@@ -52,6 +54,10 @@ class Usuario {
       }
 
       build() {
+        let validation = UserValidate.run(this.data);
+        if(validation.error) {
+          throw new Error("Validation: " + validation.message);
+        }
         return new Usuario(this.data);
       }
     }
