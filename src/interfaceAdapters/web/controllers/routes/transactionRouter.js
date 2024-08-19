@@ -20,7 +20,7 @@ router.route('/CreateTransaction').post(async (req, res) => {
         res.send(result);
 
     }catch(e){
-        res.send({status: 400, message: e.message});
+        res.send({status: 500, message: e.message});
     }
 
 });
