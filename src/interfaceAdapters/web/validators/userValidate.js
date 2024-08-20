@@ -9,9 +9,18 @@ class UserValidate extends AbstractValidate{
 
     email(email) {
         if (!(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/).test(email)) {
-            return {error: true, message:`Emial inválido: ${email}. Formato esperado: X@X.X`};
+            return {error: true, message:`Email inválido: ${email}. Formato esperado: X@X.X`};
         }
         return email;
+    }
+    
+    senha(senha){
+        if(senha.length < 6){
+            return {error: true, message: "Senha muito curta"};
+        }else if(senha.length > 20){
+            return {error: true, message: "Senha muito longa"};
+        }
+        return senha;
     }
 
     phone(phone) {
