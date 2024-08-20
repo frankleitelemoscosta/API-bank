@@ -1,3 +1,3 @@
-const type_mode = [1,0];
+const type_tipo = ["Pix","Transferencia","Empréstimo"];
 
-module.exports = type_mode;
+module.exports = type_tipo;
