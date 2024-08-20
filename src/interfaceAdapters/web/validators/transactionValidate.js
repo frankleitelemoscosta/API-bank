@@ -1,13 +1,13 @@
-const type_mode = require('../../../type/transactionType');
+const type_tipo = require('../../../type/transactionType');
 const AbstractValidate = require('./abstractValidate');
 
 class TransacaoValidate extends AbstractValidate {
 
-    mode(mode){
-        if(!type_mode.includes(mode)){
+    tipo(tipo){
+        if(!type_tipo.includes(tipo)){
             return {error: true,status: 400, message: "Invalid mode"};
         }
-        return mode;
+        return tipo;
     }
 
 }
