@@ -1,9 +1,7 @@
 const querys = require('./querys.js');
 const { fillingValues } = require('./fillingValues.js');
-const getUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/user/getUserResponse.js'); 
 const connection = require('../../dbConfig/DB/config');
-const insertUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/user/insertUserResponse.js');
-const updateUserResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/user/updateUserResponse.js');
+const apiResponse = require('../../../apiCommonResponse/responseApi.js')
 
 async function getUser(data) {  
   
@@ -11,12 +9,10 @@ async function getUser(data) {
 
   try {
       [results] = (await connection.query(querys.get_user,[data.CPFu]));
+      return apiResponse.successResponse([results]);
     } catch (e) {
       console.log(e);
-    }
-    finally {
-      connection.releaseConnection();
-      return getUserResponse.getResponse(results[0][0]);
+      return apiResponse.internalServerErrorResponse([{}]);
     }
   
 }
@@ -27,13 +23,12 @@ async function insertUser(data) {
 
     try {
       [result] = (await connection.query(querys.insert_user,fillingValues(data)));
+      return apiResponse.successResponse([result]);
     } catch (e) {
         console.log(e);
+        return apiResponse.internalServerErrorResponse([{}]);
     }
-    finally {
-      connection.releaseConnection();
-      return insertUserResponse.insertResponse(result[0][0].result);
-    }
+    
 
 }
   
@@ -43,13 +38,11 @@ async function updateUser(data) {
     let result = [];
 
     try {
-        result = await connection.query(querys.update_client, fillingValues(data));
+      result = await connection.query(querys.update_client, fillingValues(data));
+      return apiResponse.successResponse([result]);
     } catch (e) {
-        console.log(e);
-    }
-    finally {
-        connection.releaseConnection();
-        return updateUserResponse.updateResponse(result[0][0].result);
+      console.log(e);
+      return apiResponse.internalServerErrorResponse([{}]);
     }
 
 }

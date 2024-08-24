@@ -1,8 +1,8 @@
 const querys = require('./querys.js');
 const { fillingValues } = require('./fillingValues.js');
-const getTransactionResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/transaction/getTransactionResponse.js'); 
 const connection = require('../../dbConfig/DB/config');
-const insertTransactionResponse = require('../../../interfaceAdapters/web/controllers/apiResponse/transaction/insertTransaction.js');
+const apiResponse = require('../../../apiCommonResponse/responseApi.js')
+
 
 async function getTransaction(data) {  
   
@@ -10,14 +10,12 @@ async function getTransaction(data) {
 
   try {
       [results] = (await connection.query(querys.get_transaction,[data.CPFpagante]));
+      return apiResponse.successResponse([results]);
     } catch (e) {
       console.log(e);
+      return apiResponse.internalServerErrorResponse([{}]);
     }
-    finally {
-      connection.releaseConnection();
-      return getTransactionResponse.getResponse(results[0][0]);
-    }
-  
+   
 }
   
 async function insertTransaction(data) {
@@ -26,13 +24,11 @@ async function insertTransaction(data) {
 
     try {
       [result] = (await connection.query(querys.insert_transaction,fillingValues(data)));
+      return apiResponse.successResponse([results]);
     } catch (e) {
-        console.log(e);
+      return apiResponse.internalServerErrorResponse([{}]);
     }
-    finally {
-      connection.releaseConnection();
-      return insertTransactionResponse.insertResponse(result[0][0].result);
-    }
+    
 
 }
   

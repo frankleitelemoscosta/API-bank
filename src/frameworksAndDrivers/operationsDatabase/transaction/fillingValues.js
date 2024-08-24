@@ -1,10 +1,10 @@
 function fillingValues(data) {
 
     return [
-        data.CPFpagante,
-        data.CPFDestinatario,
+        data.Id_pagante,
+        data.Id_Destinatario,
         data.valor,
-        data.modo
+        data.Tipo
     ];
   }
   

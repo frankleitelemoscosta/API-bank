@@ -6,6 +6,7 @@ function fillingValues(user) {
     user.CPFu,
     user.saldo,
     user.email,
+    user.senha,
     user.telefone,
     user.aniversario
   ];
