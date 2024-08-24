@@ -6,12 +6,14 @@ class Usuario {
     name,
     saldo,
     email,
+    senha,
     telefone,
     aniversario
   }) {
     this.CPFu = CPFu;
     this.name = name;
     this.saldo = saldo;
+    this.senha = senha;
     this.email = email;
     this.telefone = telefone;
     this.aniversario = aniversario;
@@ -40,6 +42,11 @@ class Usuario {
 
       setEmail(email) {
         this.data.email = email ? UserValidate.email(email) : null;
+        return this;
+      }
+
+      setSenha(senha) {
+        this.data.senha = senha ? UserValidate.password(senha) : null;
         return this;
       }
 
