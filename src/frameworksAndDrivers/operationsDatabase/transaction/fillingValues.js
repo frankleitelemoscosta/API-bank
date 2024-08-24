@@ -4,7 +4,8 @@ function fillingValues(data) {
         data.Id_pagante,
         data.Id_Destinatario,
         data.valor,
-        data.Tipo
+        data.Tipo,
+        data.chave_Pix
     ];
   }
   
