@@ -2,15 +2,15 @@ const TransacaoValidate = require('../interfaceAdapters/web/validators/transacti
 
 class Transaction {
     constructor({
-      CPFpagante, 
-      CPFDestinatario,
+      Id_pagante, 
+      Id_Destinatario,
       valor,
-      modo
+      tipo
     }) {
-      this.CPFpagante = CPFpagante;
-      this.CPFDestinatario = CPFDestinatario;
+      this.Id_pagante = Id_pagante;
+      this.Id_Destinatario = Id_Destinatario;
       this.valor = valor;
-      this.modo = modo;
+      this.tipo = tipo;
     }
   
     static get Builder(){
@@ -19,8 +19,8 @@ class Transaction {
           this.data = {};
         }
   
-        setCPFPagante(CPFpagante) {
-          this.data.CPFpagante = CPFpagante ? TransacaoValidate.CPF(CPFpagante) : null;
+        setId_Pagante(Id_pagante) {
+          this.data.Id_pagante = Id_pagante ? TransacaoValidate.Id(Id_pagante) : null;
           return this;
         }
   
@@ -29,13 +29,13 @@ class Transaction {
           return this;
         }
   
-        setCPFDestinatario(CPFDestinatario) {
-          this.data.CPFDestinatario = CPFDestinatario ? TransacaoValidate.CPF(CPFDestinatario) : null;
+        setId_Destinatario(Id_Destinatario) {
+          this.data.Id_Destinatario = Id_Destinatario ? TransacaoValidate.Id(Id_Destinatario) : null;
           return this;
         }
 
-        setModo(modo) {
-          this.data.modo = modo ? TransacaoValidate.mode(modo) : null;
+        setTipo(tipo) {
+          this.data.tipo = tipo ? TransacaoValidate.tipo(tipo) : null;
           return this;
         }
 
