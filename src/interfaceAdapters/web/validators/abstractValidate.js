@@ -1,3 +1,5 @@
+const apiResponse = require('../../../apiCommonResponse/responseApi');
+
 class AbstractValidate {
     
     run(data) {
@@ -23,13 +25,13 @@ class AbstractValidate {
 
     CPF(CPF) {
         if (CPF.replace(/\D/g, '').length !== 11 && !(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/).test(CPF)){
-                return {error: true, message: "Invalid CPF"};
+                return apiResponse.badRequestResponse({error_message: "Invalid CPF"});
             }
     }
 
     Id(id){
         if(Number.isNaN(id)){
-            return {error: true, message: "Invalid ID"};
+            return apiResponse.badRequestResponse({error_message: "Invalid ID"});
         }
     }
 
