@@ -2,6 +2,7 @@
 
 const successResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 200,
         message: 'Success'
@@ -10,6 +11,7 @@ const successResponse = (data) => {
 
 const createResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 201,
         message: 'Created'
@@ -20,6 +22,7 @@ const createResponse = (data) => {
 
 const notModifiedResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 304,
         message: 'Not Modified'
@@ -30,6 +33,7 @@ const notModifiedResponse = (data) => {
 
 const badRequestResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 400,
         message: 'Bad Request'
@@ -38,6 +42,7 @@ const badRequestResponse = (data) => {
 
 const notFoundResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 404,
         message: 'Not Found'
@@ -46,6 +51,7 @@ const notFoundResponse = (data) => {
 
 const conflictResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 409,
         message: 'Conflict'
@@ -54,6 +60,7 @@ const conflictResponse = (data) => {
 
 const invalidData = (data) => {
     return{
+        error: true,
         data: data,
         status: 422,
         message: 'Invalid Data'
@@ -64,6 +71,7 @@ const invalidData = (data) => {
 
 const internalServerErrorResponse = (data) => {
     return{
+        error: true,
         data: data,
         status: 500,
         message: 'Internal Server Error'

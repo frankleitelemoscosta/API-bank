@@ -1,8 +1,10 @@
+const apiResponse = require('../../../apiCommonResponse/responseApi.js')
+
 class UserValidate extends AbstractValidate{
 
     name(name){
         if(name.length > 40){
-            return {error: true, message: "Name too long"};
+            return apiResponse.badRequestResponse({error_message: "Nome muito longo"});
         }
         return name;
     }
@@ -16,9 +18,9 @@ class UserValidate extends AbstractValidate{
     
     senha(senha){
         if(senha.length < 6){
-            return {error: true, message: "Senha muito curta"};
+            return apiResponse.badRequestResponse({error_message: "Senha muito curta"});
         }else if(senha.length > 20){
-            return {error: true, message: "Senha muito longa"};
+            return apiResponse.badRequestResponse({error_message: "Senha muito longa"});
         }
         return senha;
     }

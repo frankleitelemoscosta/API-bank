@@ -1,11 +1,12 @@
 const type_tipo = require('../../../type/transactionType');
 const AbstractValidate = require('./abstractValidate');
+const apiResponse = require('../../../apiCommonResponse/responseApi.js')
 
 class TransacaoValidate extends AbstractValidate {
 
     tipo(tipo){
         if(!type_tipo.includes(tipo)){
-            return {error: true,status: 400, message: "Invalid mode"};
+            return apiResponse.badRequestResponse({error_message: "Invalid mode"});
         }
         return tipo;
     }
