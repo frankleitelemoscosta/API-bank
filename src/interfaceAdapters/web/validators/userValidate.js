@@ -1,4 +1,5 @@
-const apiResponse = require('../../../apiCommonResponse/responseApi.js')
+const apiResponse = require('../../../apiCommonResponse/responseApi.js');
+const AbstractValidate = require('./abstractValidate');
 
 class UserValidate extends AbstractValidate{
 
@@ -11,12 +12,12 @@ class UserValidate extends AbstractValidate{
 
     email(email) {
         if (!(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/).test(email)) {
-            return {error: true, message:`Email inválido: ${email}. Formato esperado: X@X.X`};
+            return  apiResponse.badRequestResponse({error_message: `Email inválido: ${email}. Formato esperado: X@X.X`});
         }
         return email;
     }
     
-    senha(senha){
+    password(senha){
         if(senha.length < 6){
             return apiResponse.badRequestResponse({error_message: "Senha muito curta"});
         }else if(senha.length > 20){
@@ -27,9 +28,11 @@ class UserValidate extends AbstractValidate{
 
     phone(phone) {
         if (!(/^\(?\d{2}\)?\s?\d{4,5}-\d{4}$/).test(phone)) {
-            return {error: true, message:`Telefone inválido: ${phone}. Formats esperados: ((XX) XXXXX-XXXX, (XX) XXXX-XXXX, XXXXX-XXXX, XXXX-XXXX)`};
+            return apiResponse.badRequestResponse({ error_message:`Telefone inválido: ${phone}. Formats esperados: ((XX) XXXXX-XXXX, (XX) XXXX-XXXX, XXXXX-XXXX, XXXX-XXXX)`});
         }
         return phone;
     }
 
 }
+
+module.exports = new UserValidate();
