@@ -2,14 +2,14 @@ const apiResponse = require('../../../apiCommonResponse/responseApi');
 
 class AbstractValidate {
     
-    run(data) {
+    run(dice) {
         try {
             let errors = [];
-            Object.keys(data).forEach((field) => {
-                if(data[field]) {
-                    const {message, error} = data[field]
+            Object.keys(dice).forEach((field) => {
+                if(dice[field]) {
+                    const {error, data} = dice[field]
                     if(error) {
-                        errors.push(message)
+                        errors.push(data.error_message)
                     }
                 }
             })
@@ -24,7 +24,6 @@ class AbstractValidate {
     }
 
     CPF(CPF) {
-        console.log(CPF.replace(/\D/g, '').length !== 11)
         if (CPF.replace(/\D/g, '').length !== 11 || !(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/).test(CPF)){
                 return apiResponse.badRequestResponse({error_message: "Invalid CPF"});
             }
