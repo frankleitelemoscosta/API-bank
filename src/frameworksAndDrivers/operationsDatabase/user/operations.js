@@ -38,7 +38,7 @@ async function updateUser(data) {
     let result = [];
 
     try {
-      result = await connection.query(querys.update_client, fillingValues(data));
+      result = await connection.query(querys.update_user, fillingValues(data));
       return apiResponse.successResponse([result]);
     } catch (e) {
       console.log(e);

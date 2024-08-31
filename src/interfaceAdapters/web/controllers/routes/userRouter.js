@@ -21,6 +21,7 @@ router.route('/CreateUser').post(async (req, res) => {
         res.send(result);
         
     }catch(e){
+        console.log(e);
         res.send({status: 400, message: e.message});
     }
 
@@ -45,6 +46,7 @@ router.route('/UpdateUser').put(async (req, res) => {
         res.send(result);
 
     }catch(e){
+        console.log(e);
         res.send({status: 400, message: e.message});
     }
 
