@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const { response } = require('express');
+const apiResponse = require('../../../../apiCommonResponse/responseApi.js');  
 const Usuario = require('../../../../entities/user');
 const Op = require('../../../../frameworksAndDrivers/operationsDatabase/user/operations');
 
@@ -18,11 +20,11 @@ router.route('/CreateUser').post(async (req, res) => {
 
         result = await Op.signinUser(newUser);
 
-        res.send(result);
+        res.send(apiResponse.createResponse({data: result, message: 'Usuário criado com sucesso!'}));
         
     }catch(e){
         console.log(e);
-        res.send({status: 400, message: e.message});
+        res.send(apiResponse.internalServerErrorResponse({ message: e.message}));
     }
 
 });
@@ -43,23 +45,28 @@ router.route('/UpdateUser').put(async (req, res) => {
 
         result = await Op.updateUser(user);
 
-        res.send(result);
+        res.send(apiResponse.successResponse({data: result, message: 'Usuário atualizado com sucesso!'}));
 
     }catch(e){
         console.log(e);
-        res.send({status: 400, message: e.message});
+        res.send(apiResponse.internalServerErrorResponse({ message: e.message}));
     }
 
 });
 
 router.route('/GetUser').get(async (req, res) => {
     
-    const user = new Usuario.Builder()
-    .setCPF(req.query.CPF).build();
-    
-    result = await Op.getUser(user);
+    try{
+        const user = new Usuario.Builder()
+        .setCPF(req.query.CPF).build();
+        
+        result = await Op.getUser(user);
 
-    res.send(result);
+        res.send(apiResponse.successResponse({data:result, message: 'Usuário encontrado com sucesso!'}));
+    }catch(e){
+        console.log(e);
+        res.send(apiResponse.internalServerErrorResponse({ message: e.message}));   
+    }
 });
 
 module.exports = router;
