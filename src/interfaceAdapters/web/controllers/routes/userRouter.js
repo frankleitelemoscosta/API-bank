@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { response } = require('express');
 const apiResponse = require('../../../../apiCommonResponse/responseApi.js');  
 const Usuario = require('../../../../entities/user');
 const Op = require('../../../../frameworksAndDrivers/operationsDatabase/user/operations');
