@@ -18,7 +18,7 @@ router.route('/CreateTransaction').post(async (req, res) => {
 
         result = await Op.insertTransaction(newTransaction);
 
-        res.send(result);
+        res.send(apiResponse.successResponse({data: result, message: 'Transação realizada com sucesso!'}));
 
     }catch(e){
         console.log(e);
