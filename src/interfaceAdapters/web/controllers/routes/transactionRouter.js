@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const apiResponse = require('../../../../apiCommonResponse/responseApi.js');
 const Transaction = require('../../../../entities/transaction');
 const Op = require('../../../../frameworksAndDrivers/operationsDatabase/transaction/operations');
 
@@ -20,19 +21,25 @@ router.route('/CreateTransaction').post(async (req, res) => {
         res.send(result);
 
     }catch(e){
-        res.send({status: 500, message: e.message});
+        console.log(e);
+        res.send(apiResponse.internalServerErrorResponse({message: e.message}));
     }
 
 });
 
 router.route('/GetTransaction').get(async (req, res) => {
     
-    const newTransaction = new Transaction.Builder()
-    .setCPFPagante(req.query.CPF).build();
-    
-    result = await Op.getTransaction(newTransaction);
+    try{
+        const newTransaction = new Transaction.Builder()
+        .setCPFPagante(req.query.CPF).build();
+        
+        result = await Op.getTransaction(newTransaction);
 
-    res.send(result);
+        res.send(apiResponse.successResponse({data: result, message: 'Transação encontrada com sucesso!'}));
+    }catch(e){
+        console.log(e);
+        res.send(apiResponse.internalServerErrorResponse({ message: e.message}));
+    }
 });
 
 module.exports = router;
