@@ -26,7 +26,7 @@ class Usuario {
       }
 
       setCPF(CPF) {
-        this.data.CPFu = CPF ? CPF.UserValidate.CPF(CPF) : null;
+        this.data.CPFu = CPF ? UserValidate.CPF(CPF) : null;
         return this;
       }
 
