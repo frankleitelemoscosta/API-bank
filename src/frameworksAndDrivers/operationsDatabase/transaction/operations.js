@@ -11,10 +11,10 @@ async function getTransaction(data) {
 
   try {
       [results] = (await connection.query(querys.get_transaction,[data.Id_pagante]));
-      return apiResponse.successResponse([results]);
+      return results;
     } catch (e) {
       console.log(e);
-      return apiResponse.internalServerErrorResponse([{}]);
+      throw new Error("Request Erro: " + e);
     }
    
 }
@@ -25,9 +25,10 @@ async function addBalance(Id_Destinatario,value){
     let destinatario = (await connection.query(querysUser.get_user,[Id_Destinatario]))
     destinatario[0].saldo = destinatario[0].saldo + value;
     await updateUser(destinatario[0]);
+    return;
   }catch(e){
     console.log(e);
-    return apiResponse.internalServerErrorResponse([{}]);
+    throw new Error("Request Erro: " + e);
   }
 
 }
@@ -38,10 +39,11 @@ async function subtractBalance(Id_pagante,value){
     let pagante = (await connection.query(querysUser.get_user,[Id_pagante]))
     pagante[0].saldo = pagante[0].saldo - value;
     await updateUser(pagante[0]);
+    return;
   }
   catch(e){
     console.log(e);
-    return apiResponse.internalServerErrorResponse([{}]);
+    throw new Error("Request Erro: " + e);
   }  
 }
 
@@ -49,10 +51,10 @@ async function updateUser(data){
 
   try{
     await connection.query(querysUser.update_user,[data]);
-    return apiResponse.successResponse([{}]);
+    return ;
   }catch(e){
     console.log(e);
-    return apiResponse.internalServerErrorResponse([{}]);
+    throw new Error("Request Erro: " + e);
   }
 
 }
@@ -65,10 +67,10 @@ async function insertTransaction(data) {
       await addBalance(data.Id_Destinatario, data.valor);
       await subtractBalance(data.Id_pagante, data.valor);
       [result] = (await connection.query(querys.insert_transaction,fillingValues(data)));
-      return apiResponse.successResponse([results]);
+      return results;
     } catch (e) {
       console.log(e);
-      return apiResponse.internalServerErrorResponse([{}]);
+      throw new Error("Request Erro: " + e);
     }
     
 
