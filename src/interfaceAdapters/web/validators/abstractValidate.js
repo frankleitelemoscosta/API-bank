@@ -9,7 +9,7 @@ class AbstractValidate {
                 if(dice[field]) {
                     const {error, data} = dice[field]
                     if(error) {
-                        errors.push(data.error_message)
+                        errors.push(data.message)
                     }
                 }
             })
@@ -25,14 +25,14 @@ class AbstractValidate {
 
     CPF(CPF) {
         if (CPF.replace(/\D/g, '').length !== 11 || !(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/).test(CPF)){
-                return apiResponse.badRequestResponse({error_message: "Invalid CPF"});
+                return apiResponse.badRequestResponse({message: "Invalid CPF"});
             }
-        return CPF;
+        return CPF.replace(/\D/g, '');
     }
 
     Id(id){
         if(Number.isNaN(id)){
-            return apiResponse.badRequestResponse({error_message: "Invalid ID"});
+            return apiResponse.badRequestResponse({message: "Invalid ID"});
         }
         return id;
     }

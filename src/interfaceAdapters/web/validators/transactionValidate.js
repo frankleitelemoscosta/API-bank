@@ -6,7 +6,7 @@ class TransacaoValidate extends AbstractValidate {
 
     tipo(tipo){
         if(!type_tipo.includes(tipo)){
-            return apiResponse.badRequestResponse({error_message: "Invalid mode"});
+            return apiResponse.badRequestResponse({message: "Invalid mode"});
         }
         return tipo;
     }
