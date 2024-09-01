@@ -36,7 +36,7 @@ router.route('/UpdateUser').put(async (req, res) => {
     try{
         const user = new Usuario.Builder()
         .setCPF(bodyRequest.CPF)
-        .setName(bodyRequest.name)
+        .setName(bodyRequest.Nome)
         .setSaldo(bodyRequest.saldo)
         .setEmail(bodyRequest.email)
         .setTelefone(bodyRequest.telefone)

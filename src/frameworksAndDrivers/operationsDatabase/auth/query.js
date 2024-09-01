@@ -1,4 +1,4 @@
-const login = 'SELECT * FROM users WHERE email = ? AND Senha = ?';
+const login = 'SELECT * FROM Usuario WHERE email = ? AND Senha = ?';
 
 module.exports = {
     login
