@@ -2,8 +2,6 @@ const querys = require('./querys.js');
 const querysUser = require('../user/querys.js');
 const { fillingValues } = require('./fillingValues.js');
 const connection = require('../../dbConfig/DB/config');
-const apiResponse = require('../../../apiCommonResponse/responseApi.js')
-
 
 async function getTransaction(data) {  
   
@@ -11,7 +9,7 @@ async function getTransaction(data) {
 
   try {
       [results] = (await connection.query(querys.get_transaction,[data.Id_pagante]));
-      return results;
+      return results[0];
     } catch (e) {
       console.log(e);
       throw new Error("Request Erro: " + e);
@@ -67,7 +65,7 @@ async function insertTransaction(data) {
       await addBalance(data.Id_Destinatario, data.valor);
       await subtractBalance(data.Id_pagante, data.valor);
       [result] = (await connection.query(querys.insert_transaction,fillingValues(data)));
-      return results;
+      return ;
     } catch (e) {
       console.log(e);
       throw new Error("Request Erro: " + e);
