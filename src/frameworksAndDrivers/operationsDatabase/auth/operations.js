@@ -1,10 +1,11 @@
-const querys = require('./querys.js');
-const apiResponse = require('../../../apiCommonResponse/responseApi.js')
+const querys = require('./query.js');
+const apiResponse = require('../../../apiCommonResponse/responseApi.js');
+const connection = require('../../dbConfig/DB/config');
 
-async function login(data){
-//vou retornar o user pelo email e ver se a senha bate
+async function login(email,senha){
 try {
-    [results] = (await connection.query(querys.login,[data.email, data.senha]));
+    [results] = (await connection.query(querys.login,[email, senha]));
+    console.log(results);
     return results[0];
 } catch (e) {
     console.log(e);

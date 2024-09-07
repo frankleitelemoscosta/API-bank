@@ -27,3 +27,4 @@ app.listen(PORT, () => {
 
 app.use('/user', require('./interfaceAdapters/web/controllers/routes/userRouter'));
 app.use('/transaction', require('./interfaceAdapters/web/controllers/routes/transactionRouter'));
+app.use('/auth', require('./interfaceAdapters/web/controllers/routes/auth'));
