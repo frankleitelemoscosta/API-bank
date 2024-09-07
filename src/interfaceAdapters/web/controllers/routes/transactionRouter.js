@@ -33,7 +33,7 @@ router.route('/GetTransaction').get(async (req, res) => {
     
     try{
         const newTransaction = new Transaction.Builder()
-        .setCPFPagante(req.query.CPF).build();
+        .setId_Pagante(req.body.CPF).build();
         
         result = await Op.getTransaction(newTransaction);
 

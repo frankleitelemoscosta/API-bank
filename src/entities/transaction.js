@@ -5,12 +5,14 @@ class Transaction {
       Id_pagante, 
       Id_Destinatario,
       valor,
-      tipo
+      tipo,
+      CPF
     }) {
       this.Id_pagante = Id_pagante;
       this.Id_Destinatario = Id_Destinatario;
       this.valor = valor;
       this.tipo = tipo;
+      this.CPF = CPF;
     }
   
     static get Builder(){
@@ -36,6 +38,11 @@ class Transaction {
 
         setTipo(tipo) {
           this.data.tipo = tipo ? TransacaoValidate.tipo(tipo) : null;
+          return this;
+        }
+
+        setCPF(CPF) {
+          this.data.CPF = CPF ? TransacaoValidate.CPF(CPF): null;
           return this;
         }
 
