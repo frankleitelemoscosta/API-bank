@@ -10,11 +10,13 @@ router.route('/CreateTransaction').post(async (req, res) => {
    
     try{
         newTransaction = new Transaction.Builder()
-        .setCPFDestinatario(bodyRequest.CPFDestinatario)
-        .setCPFPagante(bodyRequest.CPFPagante)
+        .setId_Destinatario(bodyRequest.Id_Destinatario)
+        .setId_Pagante(bodyRequest.Id_Pagante)
         .setValor(bodyRequest.valor)
-        .setModo(bodyRequest.modo)
+        .setTipo(bodyRequest.modo)
         .build();
+
+        console.log(newTransaction);
 
         result = await Op.insertTransaction(newTransaction);
 

@@ -20,9 +20,9 @@ async function getTransaction(data) {
 async function addBalance(Id_Destinatario,value){
 
   try{
-    let destinatario = (await connection.query(querysUser.get_user,[Id_Destinatario]))
-    destinatario[0].saldo = destinatario[0].saldo + value;
-    await updateUser(destinatario[0]);
+    let [destinatario] = (await connection.query(querysUser.get_user,[Id_Destinatario]))
+    destinatario[0][0].saldo = Number((destinatario[0][0].saldo !== null)? destinatario[0][0].saldo : 0) + Number(value);
+    await updateUser(destinatario[0][0]);
     return;
   }catch(e){
     console.log(e);
@@ -34,9 +34,9 @@ async function addBalance(Id_Destinatario,value){
 async function subtractBalance(Id_pagante,value){
 
   try{
-    let pagante = (await connection.query(querysUser.get_user,[Id_pagante]))
-    pagante[0].saldo = pagante[0].saldo - value;
-    await updateUser(pagante[0]);
+    let [pagante] = (await connection.query(querysUser.get_user,[Id_pagante]))
+    pagante[0][0].saldo = Number((pagante[0][0].saldo !== null) ? pagante[0][0].saldo : 0) - Number(value);
+    await updateUser(pagante[0][0]);
     return;
   }
   catch(e){
@@ -48,7 +48,8 @@ async function subtractBalance(Id_pagante,value){
 async function updateUser(data){
 
   try{
-    await connection.query(querysUser.update_user,[data]);
+    delete data.CPF;
+    await connection.query(querysUser.update_user,Object.values(data));
     return ;
   }catch(e){
     console.log(e);

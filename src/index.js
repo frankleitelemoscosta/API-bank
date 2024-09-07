@@ -15,7 +15,7 @@ app.get("/",(req,res)=>{
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-	console.clear();
+	process.stdout.write('\x1Bc');
 	console.log(`
  ____    _    _   _ _  __     _    ____ ___    ____ _____ _____ _____ _____ 
 | __ )  / \\  | \\ | | |/ /    / \\  |  _ \\_ _|  / ___| ____|  ___| ____|_   _|

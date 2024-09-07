@@ -1,11 +1,12 @@
 function fillingValues(data) {
 
+    console.log(data);
     return [
         data.Id_pagante,
         data.Id_Destinatario,
         data.valor,
-        data.Tipo,
-        data.chave_Pix
+        data.tipo,
+        data.Chave_pix
     ];
   }
   
