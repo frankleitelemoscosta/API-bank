@@ -7,7 +7,7 @@ async function getUser(data) {
   let results = [];
 
     try {
-      [results] = (await connection.query(querys.get_user,[data.CPFu]));
+      [results] = (await connection.query(querys.get_user_CPF,[data.CPFu]));
       return results[0];
     } catch (e) {
       console.log(e);
