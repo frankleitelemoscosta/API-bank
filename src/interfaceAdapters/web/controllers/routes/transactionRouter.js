@@ -33,14 +33,14 @@ router.route('/GetTransaction').get(async (req, res) => {
     
     try{
         const newTransaction = new Transaction.Builder()
-        .setId_Pagante(req.body.CPF).build();
+        .setId_Pagante(req.body.Id_user).build();
         
         result = await Op.getTransaction(newTransaction);
 
-        res.send(apiResponse.successResponse({data: result, message: 'Transação encontrada com sucesso!'}));
+        res.status(200).send(apiResponse.successResponse({data: result, message: 'Transação encontrada com sucesso!'}));
     }catch(e){
         console.log(e);
-        res.send(apiResponse.internalServerErrorResponse({ message: e.message}));
+        res.status(500).send(apiResponse.internalServerErrorResponse({ message: e.message}));
     }
 });
 

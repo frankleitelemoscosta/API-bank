@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Op = require('../../../../frameworksAndDrivers/operationsDatabase/auth/operations');
 const apiResponse = require('../../../../apiCommonResponse/responseApi.js');
 
-router.route('/login').get(async (req, res) => {
+router.route('/login').post(async (req, res) => {
 
     bodyRequest = req.body;
 

@@ -4,7 +4,7 @@ const successResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 200,
+        statusCode: 200,
         message: 'Success'
     }
 }
@@ -13,7 +13,7 @@ const createResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 201,
+        statusCode: 201,
         message: 'Created'
     }
 }
@@ -24,7 +24,7 @@ const notModifiedResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 304,
+        statusCode: 304,
         message: 'Not Modified'
     }
 }
@@ -35,7 +35,7 @@ const badRequestResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 400,
+        statusCode: 400,
         message: 'Bad Request'
     }
 }
@@ -44,7 +44,7 @@ const notFoundResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 404,
+        statusCode: 404,
         message: 'Not Found'
     }
 }
@@ -53,7 +53,7 @@ const conflictResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 409,
+        statusCode: 409,
         message: 'Conflict'
     }
 }
@@ -62,7 +62,7 @@ const invalidData = (data) => {
     return{
         error: true,
         data: data,
-        status: 422,
+        statusCode: 422,
         message: 'Invalid Data'
     }
 }
@@ -73,7 +73,7 @@ const internalServerErrorResponse = (data) => {
     return{
         error: true,
         data: data,
-        status: 500,
+        statusCode: 500,
         message: 'Internal Server Error'
     }
 }
